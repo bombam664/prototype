@@ -1,6 +1,7 @@
 <?php
-session_destroy();
-
+session_start();
+echo $_SESSION['id'];
+echo $_SESSION['fullname'];
 error_reporting(E_ERROR | E_PARSE);
 $module=$_REQUEST['module'];
 if($module=="") {
@@ -25,8 +26,9 @@ $content="$module.php";
         <div class="row">
             <div class="col-md-3 border border-primary">
                 <ul>
-                    <li><a href="?module=login" target="main"><h3>Login</h3></a></li>
-                    <li><a href="?module=signin" target="main"><h3>Signin</h3></a></li>
+                    <li><a href="?module=login" target="main"><h3>menu1</h3></a></li>
+                    <li><a href="?module=signin" target="main"><h3>menu2</h3></a></li>
+                    <li><a href="../index.php" target="main"><h3>logout</h3></a></li>
                 </ul>
                 
         
