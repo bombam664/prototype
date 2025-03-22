@@ -1,6 +1,7 @@
 <?php
-session_destroy();
-
+session_start();
+unset($_SESSION['CustomerID']);
+unset($_SESSION['Name']);
 error_reporting(E_ERROR | E_PARSE);
 $module=$_REQUEST['module'];
 if($module=="") {

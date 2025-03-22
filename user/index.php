@@ -27,7 +27,7 @@ $content="$module.php";
             <div class="col-md-3 border border-primary">
                 <ul>
                     <li><a href="?module=login" target="main"><h3>menu1</h3></a></li>
-                    <li><a href="?module=signin" target="main"><h3>menu2</h3></a></li>
+                    <li><a href="?module=about" target="main"><h3>about</h3></a></li>
                     <li><a href="../index.php" target="main"><h3>logout</h3></a></li>
                 </ul>
                 
