@@ -1,7 +1,13 @@
+
 <?php
 session_start();
-echo $_SESSION['id'];
+if($_SESSION['id'] == '') {
+    echo "Please Login!";
+    echo "<META HTTP-EQUIV='Refresh' CONTENT='1;URL=../index.php'>";
+    exit();
+}
 echo $_SESSION['fullname'];
+
 error_reporting(E_ERROR | E_PARSE);
 $module=$_REQUEST['module'];
 if($module=="") {
@@ -26,9 +32,9 @@ $content="$module.php";
         <div class="row">
             <div class="col-md-3 border border-primary">
                 <ul>
-                    <li><a href="?module=login" target="main"><h3>menu1</h3></a></li>
-                    <li><a href="?module=about" target="main"><h3>about</h3></a></li>
-                    <li><a href="../index.php" target="main"><h3>logout</h3></a></li>
+                    <li><a href="?module=main"><h3>home</h3></a></li>
+                    <li><a href="?module=about"><h3>about</h3></a></li>
+                    <li><a href="../index.php"><h3>logout</h3></a></li>
                 </ul>
                 
         
