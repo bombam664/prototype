@@ -6,7 +6,7 @@ if($_SESSION['id'] == '') {
     echo "<META HTTP-EQUIV='Refresh' CONTENT='1;URL=../index.php'>";
     exit();
 }
-echo $_SESSION['fullname'];
+ $_SESSION['fullname'];
 
 error_reporting(E_ERROR | E_PARSE);
 $module=$_REQUEST['module'];
@@ -34,6 +34,7 @@ $content="$module.php";
                 <ul>
                     <li><a href="?module=main"><h3>home</h3></a></li>
                     <li><a href="?module=about"><h3>about</h3></a></li>
+                    <li><a href="?module=transactions"><h3>transactions</h3></a></li>
                     <li><a href="../index.php"><h3>logout</h3></a></li>
                 </ul>
                 
