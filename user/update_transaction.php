@@ -13,8 +13,8 @@ $sql = "UPDATE transactions SET book_id='$book_id'
 
 $query = mysqli_query($conn, $sql);
 if($query){
- echo "update successfull";
- echo "<meta http-equiv='refresh' content='1;url=?module=transactions'>";
+//  echo "update successfull";
+ echo "<meta http-equiv='refresh' content='0;url=?module=transactions'>";
 }else{
  echo "no ok .$sql";
 }

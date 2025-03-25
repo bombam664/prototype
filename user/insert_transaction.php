@@ -12,8 +12,8 @@ $sql = "INSERT INTO `transactions`(`book_id`, `member_id`, `staff_id`, `transact
 VALUES ('$book_id', '$member_id', '$staff_id', '$transaction_type', '$due_date')";
 $query = mysqli_query($conn, $sql);
 if ($query) {
-    echo "Transaction success";
-    echo "<META HTTP-EQUIV='Refresh' CONTENT='1;URL=?module=transactions'>";
+    // echo "Transaction success";
+    echo "<META HTTP-EQUIV='Refresh' CONTENT='0;URL=?module=transactions'>";
 } else {
     echo "Transaction failed";
 }
