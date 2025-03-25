@@ -57,7 +57,7 @@ $return_date = $row['return_date'];
 
                 <?php
             }
-            mysqli_close($conn);
+           
             ?>
 
         </select>
@@ -65,16 +65,18 @@ $return_date = $row['return_date'];
     <div class="mb-3">
         <label for="transaction_type" class="form-label">transaction_type</label>
         <select name="transaction_type" id="transaction_type" class="form-select">
-            <option value="Checkout">Checkout</option>
-            <option value="Return">Return</option>
+            <option <?php if($row['transaction_type'] == "Checkout"){  ?> selected="selected" <?php } ?> value="Checkout">Checkout</option>
+            <option <?php if($row['transaction_type'] == "Return"){  ?> selected="selected" <?php } ?> value="Return">Return</option>
         </select>
     </div>
     <div class="mb-3">
         <label for="due_date" class="form-label">due_date</label>
         <input type="date" class="form-control" id="due_date" name="due_date"
-            value="<?php echo date("Y-m-d", strtotime(" +7 day")); ?>">
+            value="<?php echo date("Y-m-d", strtotime($due_date)); ?>">
     </div>
+    
     <div class="mb-3">
+    <input type="hidden" name="transaction_id" value="<?php echo $transaction_id; ?>">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>
