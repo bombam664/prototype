@@ -33,7 +33,7 @@ $content="$module.php";
             <div class="col-md-3 border border-primary">
                 <ul>
                     <li><a href="?module=main"><h3>home</h3></a></li>
-                    <li><a href="?module=about"><h3>about</h3></a></li>
+                    <li><a href="?module=about"><h3>book</h3></a></li>
                     <li><a href="?module=transactions"><h3>transactions</h3></a></li>
                     <li><a href="../index.php"><h3>logout</h3></a></li>
                 </ul>

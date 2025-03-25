@@ -1,11 +1,12 @@
 <?php
 include('../conDB.php');
 session_start();
-$sql = "SELECT trans.transaction_id, boo.title, trans.member_id,
+$sql = "SELECT trans.transaction_id, boo.title, trans.member_id, mem.first_name AS mfirstname, mem.last_name AS mlastname,
 staff.first_name, staff.last_name, trans.transaction_type,
 trans.transaction_date, trans.due_date, trans.return_date 
-FROM ((transactions AS trans INNER JOIN books AS boo ON trans.book_id = boo.book_id) 
-INNER JOIN staff AS staff ON trans.staff_id = staff.staff_id) WHERE member_id = '$_SESSION[id]'";
+FROM (((transactions AS trans INNER JOIN books AS boo ON trans.book_id = boo.book_id) 
+INNER JOIN staff AS staff ON trans.staff_id = staff.staff_id)
+INNER JOIN members AS mem ON trans.member_id = mem.member_id)";
 
 $query = mysqli_query($conn, $sql);
 $rowcount = mysqli_num_rows($query);
@@ -37,15 +38,19 @@ if ($rowcount <= 0) {
                 <th scope="row"><?php $i += 1;
                 echo $i; ?></th>
                 <td><?php echo $row['title']; ?></td>
-                <td><?php echo $_SESSION['fullname']; ?></td>
+                <td><?php echo $row['mfirstname'].' '.$row['mlastname']; ?></td>
                 <td><?php echo $row['first_name'].' '.$row['last_name']; ?></td>
                 <td><?php echo $row['transaction_type']; ?></td>
                 <td><?php echo $row['transaction_date']; ?></td>
                 <td><?php echo $row['due_date']; ?></td>
                 <td><?php echo $row['return_date']; ?></td>
-                <td><button type="button" class="btn btn-primary" onclick="">return</button>
-                <button type="button" class="btn btn-warning" onclick="">edit</button>
-                <button type="button" class="btn btn-danger" onclick="">del</button>
+                <td>
+                    <a href="?module=return&transaction_id=<?php echo $row['transaction_id']; ?>"
+                    class="btn btn-primary">return</a>
+                    <a href="?module=edit_transaction&transaction_id=<?php echo $row['transaction_id']; ?>"
+                     class="btn btn-warning">edit</a>
+                    <a href="?module=delete_transaction&transaction_id=<?php echo $row['transaction_id']; ?>"
+                     class="btn btn-danger" onclick="return confirm('ยืนยันการลบ !')">delete</a>
                 </td>
 
             </tr>
