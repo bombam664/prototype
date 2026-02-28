@@ -1,14 +1,19 @@
 <?php
+
 include('../conDB.php');
 session_start();
 $_SESSION['id'];
 $_SESSION['fullname'];
 $book_id = $_GET['book_id'];
 
-$sql = "SELECT title FROM `books` WHERE book_id = '$book_id'";
-$query = mysqli_query($conn, $sql);
-$row = mysqli_fetch_assoc($query);
+// ใช้ prepared statement
+$stmt = $conn->prepare("SELECT title FROM `books` WHERE book_id = ?");
+$stmt->bind_param("i", $book_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
 $book_title = $row['title'];
+$stmt->close();
 ?>
 <form action="?module=insert_transaction" method="post">
     <div class="mb-3">
@@ -25,17 +30,17 @@ $book_title = $row['title'];
         <label for="staff_id" class="form-label">staff</label>
         <select name="staff_id" id="staff_id" class="form-select">
             <?php
-            $sql = "SELECT staff_id, first_name, last_name FROM `staff`";
-            $query = mysqli_query($conn, $sql);
-            while ($row = mysqli_fetch_assoc($query)) {
-
+            // ใช้ prepared statement
+            $stmt_staff = $conn->prepare("SELECT staff_id, first_name, last_name FROM `staff`");
+            $stmt_staff->execute();
+            $result_staff = $stmt_staff->get_result();
+            while ($row = $result_staff->fetch_assoc()) {
                 ?>
                 <option value="<?php echo $row['staff_id']; ?>"><?php echo $row['first_name'] . ' ' . $row['last_name']; ?>
                 </option>
-
                 <?php
             }
-            mysqli_close($conn);
+            $stmt_staff->close();
             ?>
 
         </select>

@@ -1,15 +1,11 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "library_system";
+function connectlibrary($dbname = "library_system", $host = "localhost", $user = "root", $pass = "") {
+    $conn = mysqli_connect($host, $user, $pass, $dbname);
 
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $database);
-
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-// echo "Connected successfully";
+    if (!$conn) {
+        die("Connection to '$dbname' failed: " . mysqli_connect_error());
+    }
+    mysqli_set_charset($conn, "utf8mb4");
+    return $conn;
+  }
 ?>

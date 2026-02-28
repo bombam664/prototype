@@ -1,5 +1,7 @@
 <?php
-include 'conDB.php';
+require_once 'conDB.php';
+$conn = connectlibrary();
+
 $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 $email = $_POST['email'];

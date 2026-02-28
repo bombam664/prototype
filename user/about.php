@@ -1,11 +1,13 @@
 <?php
 include('../conDB.php');
 
-$sql = "SELECT `book_id`, `title`, `isbn`, `publication_date`, 
-`category_id`, `publisher`, `available_quantity` FROM `books`";
+// เตรียม statement
+$stmt = $conn->prepare("SELECT `book_id`, `title`, `isbn`, `publication_date`, `category_id`, `publisher`, `available_quantity` FROM `books`");
+// ถ้ามี parameter ให้ใช้ $stmt->bind_param(...) ตรงนี้
 
-$query = mysqli_query($conn, $sql);
-$rowcount = mysqli_num_rows($query);
+$stmt->execute();
+$result = $stmt->get_result();
+$rowcount = $result->num_rows;
 if ($rowcount <= 0) {
     echo "No data found";
 }
@@ -26,11 +28,12 @@ if ($rowcount <= 0) {
     </thead>
     <tbody>
         <?php
-        while ($row = mysqli_fetch_assoc($query)) {
-           
+        $i = 0;
+        while ($row = $result->fetch_assoc()) {
+            $i++;
         ?>
             <tr>
-                <th scope="row"><?php $i+=1; echo $i; ?></th>
+                <th scope="row"><?php echo $i; ?></th>
                 <td><?php echo $row['title']; ?></td>
                 <td><?php echo $row['isbn']; ?></td>
                 <td><?php echo $row['publication_date']; ?></td>
@@ -38,16 +41,14 @@ if ($rowcount <= 0) {
                 <td><?php echo $row['publisher']; ?></td>
                 <td><?php echo $row['available_quantity']; ?></td>
                 <td><button type="button" class="btn btn-primary" onclick="document.location='?module=form_transactions&book_id=<?php echo $row['book_id']; ?>'">select</button></td>
-
             </tr>
         <?php
         }
-
         ?>
     </tbody>
 </table>
 
-
 <?php
-mysqli_close($conn);
+$stmt->close();
+$conn->close();
 ?>
